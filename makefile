@@ -1,16 +1,12 @@
+all: parse.c
+	gcc -o program parse.c
 
-ifeq ($(DEBUG),true)
-	CC = gcc -g
-else
-	CC = gcc
-endif
-
-parse.o: parse.c
-	$(CC) -o program parse.c
-
-run:
+parse.o:
+	gcc -c parse.c
+run: 
 	./program
 
 clean:
-	rm program
-	rm *.o
+	rm -rf program
+	rm -rf ~.o
+	rm -rf *.~

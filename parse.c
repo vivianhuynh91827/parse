@@ -3,24 +3,21 @@
 #include <string.h>
 #include <unistd.h>
 
-char ** parse_args( char * line ){
-  char * args[5];
-  char * arg = line;
+char ** parse_args(char * line){
+  char ** args = malloc(sizeof(char *)*5);
+  
   int idx = 0;
-  while(arg){
-    strsep(&arg, " ");
-    args[idx] = arg;
-    idx ++;
+  while (line != NULL){
+    args[idx] = strsep(&line," ");
+    idx++;
   }
-  for (int i = 0; i < idx; i ++){
-    printf("%s\n", args[i]);
-  }
+  args[idx] = NULL;
   return args;
-
-
 }
 
 int main(){
-  parse_args("ls -a -l");
+  char test[100] = "ls -a -l";
+  char ** args = parse_args(test);
+  execvp(args[0], args);
   return 0;
 }
